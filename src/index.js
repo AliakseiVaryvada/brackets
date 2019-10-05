@@ -6,7 +6,7 @@ module.exports = function check(str, bracketsConfig) {
     let openIndex = 0; // номер закрытой
     let openBr = []; // список открывающих
     let closeBr = []; // список закрывающих
-    let n = [];
+    let n = 0;
     bracketsConfig.forEach(element => {
         //определяем какая открывающая, а какая закрывающая скобка
         openBr.push(element[0]);
@@ -19,7 +19,8 @@ module.exports = function check(str, bracketsConfig) {
         openIndex = openBr.indexOf(mass[i]); // ищем открытую скобку (-1 не найдено)
         if (openIndex !== -1) {
             console.log("FIND OPEN");
-            if (stack.indexOf("|") == -1) {
+
+            if (stack.includes("|") === false) {
                 //нашли
                 stack.push(openIndex); // кладём в стек найденую открытую скобку
             } else {
