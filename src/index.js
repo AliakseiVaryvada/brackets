@@ -27,7 +27,7 @@ module.exports = function check(str, bracketsConfig) {
         if (closeIndex !== -1) {
             // нашли
             console.log("FIND CLOSE");
-            openIndex = stac; //вытягиваем последнюю открывающую из стека
+            openIndex = stac.pop(); //вытягиваем последнюю открывающую из стека
             if (closeIndex !== openIndex) {
                 //если они не совпадают
                 console.log("false open != close");
