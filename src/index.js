@@ -46,4 +46,4 @@ function check(str, bracketsConfig) {
     }
     return str == "" ? true : false;
 }
-console.log(check("((()))()", config1));
+console.log(check("())(", config1));
