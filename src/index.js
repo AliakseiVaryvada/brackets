@@ -13,11 +13,15 @@ module.exports = function check(str, bracketsConfig) {
     console.log("open" + openBr);
     console.log("close" + closeBr);
     while (mass.length > 0) {
-        for (i = 0; i < mass.length; i++) {
+        console.log("in while");
+        for (let i = 0; i < mass.length; i++) {
+            console.log("in for");
             // перебираем массив символов
             openIndex = openBr.indexOf(mass[i]); // ищем открытую скобку (-1 не найдено)
             if (openIndex !== -1) {
-                if (mass[i + 1] == close.indexOf(mass[i])) {
+                console.log("find open");
+                if (mass[i + 1] == closeBr.indexOf(mass[i])) {
+                    console.log("find close!");
                     mass.splice(i, 2);
                 }
                 if (mass.length == 1) {
