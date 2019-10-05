@@ -10,6 +10,8 @@ module.exports = function check(str, bracketsConfig) {
         openBr.push(element[0]);
         closeBr.push(element[1]);
     });
+    console.log(openBr);
+    console.log(closeBr);
     for (i = 0; i < mass.length; i++) {
         // перебираем массив символов
         openIndex = openBr.indexOf(mass[i]); // ищем открытую скобку (-1 не найдено)
@@ -17,7 +19,7 @@ module.exports = function check(str, bracketsConfig) {
             //нашли
             stack.push(openIndex); // кладём в стек найденую открытую скобку
         }
-        closeIndex = close.indexOf(mass[i]); // ищем закрытую скобку (-1 не найдено)
+        closeIndex = closeBr.indexOf(mass[i]); // ищем закрытую скобку (-1 не найдено)
         if (closeIndex !== -1) {
             // нашли
             openIndex = stack.pop(); //вытягиваем последнюю открывающую из стека
