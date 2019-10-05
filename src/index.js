@@ -21,7 +21,7 @@ module.exports = function check(str, bracketsConfig) {
             if (openIndex !== -1) {
                 console.log("find open");
                 console.log(openIndex);
-                console.log(closeBr.indexOf(mass[i + 1]));
+                console.log("!!" + closeBr.indexOf(mass[i + 1]));
                 if (openIndex == closeBr.indexOf(mass[i + 1])) {
                     console.log("find close!");
                     mass.splice(i, 2);
