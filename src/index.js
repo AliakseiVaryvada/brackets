@@ -26,10 +26,10 @@ module.exports = function check(str, bracketsConfig) {
                     console.log("find close!");
                     mass.splice(i, 2);
                 }
-                if (mass.length == 1) {
-                    return false;
-                }
             }
+        }
+        if (mass.length == 1) {
+            return false;
         }
     }
     console.log("true");
