@@ -1,45 +1,21 @@
 module.exports = function check(str, bracketsConfig) {
-    let mass = [...str]; // разбиваем строку в массив
-    let mass1 = mass;
-    let stack = []; //объявляем пустой стек
-    let closeIndex = 0; // номер открытой скобки
-    let openIndex = 0; // номер закрытой
-    let openBr = []; // список открывающих
-    let closeBr = []; // список закрывающих
-    let n = 0;
-    bracketsConfig.forEach(element => {
-        //определяем какая открывающая, а какая закрывающая скобка
-        openBr.push(element[0]);
-        closeBr.push(element[1]);
-    });
-    console.log("open" + openBr);
-    console.log("close" + closeBr);
-    for (i = 0; i < mass.length; i++) {
-        // перебираем массив символов
-        openIndex = openBr.indexOf(mass[i]); // ищем открытую скобку (-1 не найдено)
-        if (openIndex !== -1) {
-            console.log("FIND OPEN");
-            //нашли
-            stack.push(openIndex); // кладём в стек найденую открытую скобку
-        }
-        closeIndex = closeBr.indexOf(mass[i]); // ищем закрытую скобку (-1 не найдено)
-        if (closeIndex !== -1) {
-            // нашли
-            console.log("FIND CLOSE");
-            openIndex = stack.pop(); //вытягиваем последнюю открывающую из стека
-            if (closeIndex !== openIndex) {
-                //если они не совпадают
-                console.log("false open != close");
-                return false; //вернуть false
-            }
+    let count = 0;
+    let i = 0;
+    let promStr = "";
+    let array = [];
+    let stopSignal = 1;
+    while ((stopSignal = 1)) {
+        stopSignal = 0;
+        bracketsConfig.forEach(function(element, index) {
+            array = str.split(
+                bracketsConfig[index][0] + bracketsConfig[index][1]
+            );
+        });
+        if (array.length > 1) {
+            count = count + 1;
+            stopSignal = 1;
+            promStr = array.join("");
         }
     }
-
-    if (stack.length !== 0) {
-        //проверяем пустоту стека после перебора
-        console.log("false disbalanse");
-        return false;
-    }
-    console.log("true");
-    return true;
+    return promStr == "" ? true : false;
 };
