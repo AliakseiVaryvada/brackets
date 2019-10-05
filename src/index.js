@@ -12,31 +12,20 @@ module.exports = function check(str, bracketsConfig) {
     });
     console.log("open" + openBr);
     console.log("close" + closeBr);
-    for (i = 0; i < mass.length; i++) {
-        // перебираем массив символов
-        openIndex = openBr.indexOf(mass[i]); // ищем открытую скобку (-1 не найдено)
-        if (openIndex !== -1) {
-            console.log("FIND OPEN");
-            //нашли
-            stack.push(openIndex); // кладём в стек найденую открытую скобку
-        }
-        closeIndex = closeBr.indexOf(mass[i]); // ищем закрытую скобку (-1 не найдено)
-        if (closeIndex !== -1) {
-            // нашли
-            console.log("FIND CLOSE");
-            openIndex = stack.pop(); //вытягиваем последнюю открывающую из стека
-            if (closeIndex !== openIndex) {
-                //если они не совпадают
-                console.log("false open != close");
-                return false; //вернуть false
+    while (mass.length > 0) {
+        for (i = 0; i < mass.length; i++) {
+            // перебираем массив символов
+            openIndex = openBr.indexOf(mass[i]); // ищем открытую скобку (-1 не найдено)
+            if (openIndex !== -1) {
+                if (mass[i + 1] == close.indexOf(mass[i])) {
+                    mass.splice(i, 2);
+                }
+                if (mass.length == 1) {
+                    return false;
+                }
             }
         }
+        console.log("true");
+        return true;
     }
-    if (stack.length !== 0) {
-        //проверяем пустоту стека после перебора
-        console.log("false disbalanse");
-        return false;
-    }
-    console.log("true");
-    return true;
 };

@@ -1,0 +1,46 @@
+module.exports = function check(str, bracketsConfig) {
+    let mass = [...str]; // разбиваем строку в массив
+    let stack = []; //объявляем пустой стек
+    let closeIndex = 0; // номер открытой скобки
+    let openIndex = 0; // номер закрытой
+    let openBr = []; // список открывающих
+    let closeBr = []; // список закрывающих
+    bracketsConfig.forEach(element => {
+        //определяем какая открывающая, а какая закрывающая скобка
+        openBr.push(element[0]);
+        closeBr.push(element[1]);
+        if (element[1] == "|") {
+            closeBr.splice(-1, 1);
+            closeBr.push(element[1]);
+        }
+    });
+    console.log("open" + openBr);
+    console.log("close" + closeBr);
+    for (i = 0; i < mass.length; i++) {
+        // перебираем массив символов
+        openIndex = openBr.indexOf(mass[i]); // ищем открытую скобку (-1 не найдено)
+        if (openIndex !== -1) {
+            console.log("FIND OPEN");
+            //нашли
+            stack.push(openIndex); // кладём в стек найденую открытую скобку
+        }
+        closeIndex = closeBr.indexOf(mass[i]); // ищем закрытую скобку (-1 не найдено)
+        if (closeIndex !== -1) {
+            // нашли
+            console.log("FIND CLOSE");
+            openIndex = stack.pop(); //вытягиваем последнюю открывающую из стека
+            if (closeIndex !== openIndex) {
+                //если они не совпадают
+                console.log("false open != close");
+                return false; //вернуть false
+            }
+        }
+    }
+    if (stack.length !== 0) {
+        //проверяем пустоту стека после перебора
+        console.log("false disbalanse");
+        return false;
+    }
+    console.log("true");
+    return true;
+};
