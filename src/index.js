@@ -27,18 +27,16 @@ module.exports = function check(str, bracketsConfig) {
         if (closeIndex !== -1) {
             // нашли
             console.log("FIND CLOSE");
-            openIndex = stack.pop(); //вытягиваем последнюю открывающую из стека
+            openIndex = stac; //вытягиваем последнюю открывающую из стека
             if (closeIndex !== openIndex) {
                 //если они не совпадают
                 console.log("false open != close");
                 return false; //вернуть false
-            } else {
-                mass1.splice(i, 1);
-                mass1.splice(n, 1);
             }
         }
     }
-    console.log(mass1);
+
+    console.log(mass);
     if (stack.length !== 0) {
         //проверяем пустоту стека после перебора
         console.log("false disbalanse");
