@@ -5,14 +5,11 @@ module.exports = function check(str, bracketsConfig) {
     let openIndex = 0; // номер закрытой
     let openBr = []; // список открывающих
     let closeBr = []; // список закрывающих
+    let n = 0;
     bracketsConfig.forEach(element => {
         //определяем какая открывающая, а какая закрывающая скобка
         openBr.push(element[0]);
         closeBr.push(element[1]);
-        if (element[1] == "|") {
-            closeBr.splice(-1, 1);
-            closeBr.push(element[1]);
-        }
     });
     console.log("open" + openBr);
     console.log("close" + closeBr);
@@ -23,6 +20,7 @@ module.exports = function check(str, bracketsConfig) {
             console.log("FIND OPEN");
             //нашли
             stack.push(openIndex); // кладём в стек найденую открытую скобку
+            n = i;
         }
         closeIndex = closeBr.indexOf(mass[i]); // ищем закрытую скобку (-1 не найдено)
         if (closeIndex !== -1) {
@@ -33,9 +31,13 @@ module.exports = function check(str, bracketsConfig) {
                 //если они не совпадают
                 console.log("false open != close");
                 return false; //вернуть false
+            } else {
+                mass.splice(i, 1);
+                mass.splice(n, 1);
             }
         }
     }
+    console.log(mass);
     if (stack.length !== 0) {
         //проверяем пустоту стека после перебора
         console.log("false disbalanse");

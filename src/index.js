@@ -5,6 +5,7 @@ module.exports = function check(str, bracketsConfig) {
     let openIndex = 0; // номер закрытой
     let openBr = []; // список открывающих
     let closeBr = []; // список закрывающих
+    let n = 0;
     bracketsConfig.forEach(element => {
         //определяем какая открывающая, а какая закрывающая скобка
         openBr.push(element[0]);
@@ -12,29 +13,36 @@ module.exports = function check(str, bracketsConfig) {
     });
     console.log("open" + openBr);
     console.log("close" + closeBr);
-    while (mass.length > 0) {
-        console.log("in while");
-        for (let i = 0; i < mass.length; i++) {
-            console.log("in for");
-            // перебираем массив символов
-            openIndex = openBr.indexOf(mass[i]); // ищем открытую скобку (-1 не найдено)
-            if (openIndex !== -1) {
-                console.log("find open");
-                if (openIndex == closeBr.indexOf(mass[i + 1])) {
-                    console.log("find close!");
-                    mass.splice(i, 2);
-                }
+    for (i = 0; i < mass.length; i++) {
+        // перебираем массив символов
+        openIndex = openBr.indexOf(mass[i]); // ищем открытую скобку (-1 не найдено)
+        if (openIndex !== -1) {
+            console.log("FIND OPEN");
+            //нашли
+            stack.push(openIndex); // кладём в стек найденую открытую скобку
+            n = i;
+        }
+        closeIndex = closeBr.indexOf(mass[i]); // ищем закрытую скобку (-1 не найдено)
+        if (closeIndex !== -1) {
+            // нашли
+            console.log("FIND CLOSE");
+            openIndex = stack.pop(); //вытягиваем последнюю открывающую из стека
+            if (closeIndex !== openIndex) {
+                //если они не совпадают
+                console.log("false open != close");
+                return false; //вернуть false
+            } else {
+                mass.splice(i, 1);
+                mass.splice(n, 1);
             }
         }
-        console.log(mass);
-        if (mass.length == 1) {
-            return false;
-        }
     }
-    console.log("true");
-    if (mass.length == 0) {
-        return true;
-    } else {
+    console.log(mass);
+    if (stack.length !== 0) {
+        //проверяем пустоту стека после перебора
+        console.log("false disbalanse");
         return false;
     }
+    console.log("true");
+    return true;
 };
