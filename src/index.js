@@ -31,11 +31,12 @@ module.exports = function check(str, bracketsConfig) {
                 }
             }
         }
-        console.log("true");
-        if (mass.length == 0) {
-            return true;
-        } else {
-            return false;
-        }
     }
+    console.log("true");
+    if (mass.length == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
 };
