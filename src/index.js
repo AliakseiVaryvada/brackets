@@ -16,23 +16,27 @@ module.exports = function check(str, bracketsConfig) {
         // перебираем массив символов
         openIndex = openBr.indexOf(mass[i]); // ищем открытую скобку (-1 не найдено)
         if (openIndex !== -1) {
+            console.log("FIND OPEN");
             //нашли
             stack.push(openIndex); // кладём в стек найденую открытую скобку
         }
         closeIndex = closeBr.indexOf(mass[i]); // ищем закрытую скобку (-1 не найдено)
         if (closeIndex !== -1) {
             // нашли
+            console.log("FIND CLOSE");
             openIndex = stack.pop(); //вытягиваем последнюю открывающую из стека
             if (closeIndex !== openIndex) {
                 //если они не совпадают
+                console.log("false open != close");
                 return false; //вернуть false
             }
         }
         if (stack.length !== 0) {
             //проверяем пустоту стека после перебора
+            console.log("false disbalanse");
             return false;
         }
-
+        console.log("true");
         return true;
     }
 };
