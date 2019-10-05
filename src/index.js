@@ -19,8 +19,11 @@ module.exports = function check(str, bracketsConfig) {
         openIndex = openBr.indexOf(mass[i]); // ищем открытую скобку (-1 не найдено)
         if (openIndex !== -1) {
             console.log("FIND OPEN");
-            //нашли
-            stack.push(openIndex); // кладём в стек найденую открытую скобку
+            if (stack.indexOf("|") == -1) {
+                console.log("POVTOR");
+                //нашли
+                stack.push(openIndex); // кладём в стек найденую открытую скобку
+            }
         }
         closeIndex = closeBr.indexOf(mass[i]); // ищем закрытую скобку (-1 не найдено)
         if (closeIndex !== -1) {
