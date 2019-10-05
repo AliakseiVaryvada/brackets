@@ -1,5 +1,6 @@
 module.exports = function check(str, bracketsConfig) {
     let mass = [...str]; // разбиваем строку в массив
+    let mass1 = mass;
     let stack = []; //объявляем пустой стек
     let closeIndex = 0; // номер открытой скобки
     let openIndex = 0; // номер закрытой
@@ -32,12 +33,12 @@ module.exports = function check(str, bracketsConfig) {
                 console.log("false open != close");
                 return false; //вернуть false
             } else {
-                mass.splice(i, 1);
-                mass.splice(n, 1);
+                mass1.splice(i, 1);
+                mass1.splice(n, 1);
             }
         }
     }
-    console.log(mass);
+    console.log(mass1);
     if (stack.length !== 0) {
         //проверяем пустоту стека после перебора
         console.log("false disbalanse");
