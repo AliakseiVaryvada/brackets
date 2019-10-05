@@ -20,9 +20,10 @@ module.exports = function check(str, bracketsConfig) {
         if (openIndex !== -1) {
             console.log("FIND OPEN");
             if (stack.indexOf("|") == -1) {
-                console.log("POVTOR");
                 //нашли
                 stack.push(openIndex); // кладём в стек найденую открытую скобку
+            } else {
+                console.log("POVTOR, MUST CLOSE");
             }
         }
         closeIndex = closeBr.indexOf(mass[i]); // ищем закрытую скобку (-1 не найдено)
@@ -38,7 +39,6 @@ module.exports = function check(str, bracketsConfig) {
         }
     }
 
-    console.log(mass);
     if (stack.length !== 0) {
         //проверяем пустоту стека после перебора
         console.log("false disbalanse");
