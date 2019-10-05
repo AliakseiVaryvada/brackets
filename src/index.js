@@ -19,32 +19,28 @@ module.exports = function check(str, bracketsConfig) {
         openIndex = openBr.indexOf(mass[i]); // ищем открытую скобку (-1 не найдено)
         if (openIndex !== -1) {
             console.log("FIND OPEN");
-
-            if (stack.includes("|") === false) {
-                //нашли
-                stack.push(openIndex); // кладём в стек найденую открытую скобку
-            } else {
-                console.log("POVTOR, MUST CLOSE");
-            }
-        }
-        closeIndex = closeBr.indexOf(mass[i]); // ищем закрытую скобку (-1 не найдено)
-        if (closeIndex !== -1) {
-            // нашли
-            console.log("FIND CLOSE");
-            openIndex = stack.pop(); //вытягиваем последнюю открывающую из стека
-            if (closeIndex !== openIndex) {
-                //если они не совпадают
-                console.log("false open != close");
-                return false; //вернуть false
-            }
+            //нашли
+            stack.push(openIndex); // кладём в стек найденую открытую скобку
         }
     }
-
-    if (stack.length !== 0) {
-        //проверяем пустоту стека после перебора
-        console.log("false disbalanse");
-        return false;
+    closeIndex = closeBr.indexOf(mass[i]); // ищем закрытую скобку (-1 не найдено)
+    if (closeIndex !== -1) {
+        // нашли
+        console.log("FIND CLOSE");
+        openIndex = stack.pop(); //вытягиваем последнюю открывающую из стека
+        if (closeIndex !== openIndex) {
+            //если они не совпадают
+            console.log("false open != close");
+            return false; //вернуть false
+        }
     }
-    console.log("true");
-    return true;
+}
+
+if (stack.length !== 0) {
+    //проверяем пустоту стека после перебора
+    console.log("false disbalanse");
+    return false;
+}
+console.log("true");
+return true;
 };
