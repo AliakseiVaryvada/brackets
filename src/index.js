@@ -20,6 +20,7 @@ module.exports = function check(str, bracketsConfig) {
             openIndex = openBr.indexOf(mass[i]); // ищем открытую скобку (-1 не найдено)
             if (openIndex !== -1) {
                 console.log("find open");
+                console.log(openIndex);
                 if (mass[i + 1] == closeBr.indexOf(mass[i])) {
                     console.log("find close!");
                     mass.splice(i, 2);
@@ -30,6 +31,10 @@ module.exports = function check(str, bracketsConfig) {
             }
         }
         console.log("true");
-        return true;
+        if (mass.length == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 };
